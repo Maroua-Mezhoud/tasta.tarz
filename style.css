@@ -1,0 +1,214 @@
+/* ───────── Tokens (taken from the logo) ───────── */
+:root {
+  --paper: #f7f0fd;
+  --ink: #4f4a73;
+  --ink-deep: #2f2b4a;
+  --rose: #f6cfd8;
+  --rose-deep: #e58fa6;
+  --butter: #f6ebbf;
+  --peri: #c5c2e8;
+  --lilac: #e6d9f3;
+  --glass: rgba(255, 255, 255, .58);
+  --shadow: 0 18px 50px -22px rgba(79, 74, 115, .45);
+  --font-display: "Aref Ruqaa", "Amiri", serif;
+  --font-body: "Tajawal", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper) url("assets/bg.png") center / cover fixed no-repeat;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 4px; border-radius: 12px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+main { position: relative; z-index: 1; }
+section { padding-inline: 1.25rem; }
+
+/* ───────── Scroll spine ───────── */
+.spine {
+  position: fixed; inset-inline-start: 14px; top: 16vh; height: 68vh; width: 2px; z-index: 5;
+  background: repeating-linear-gradient(to bottom, var(--peri) 0 7px, transparent 7px 14px);
+}
+.spine span {
+  position: absolute; inset-inline: 0; top: 0; height: 100%;
+  transform-origin: top; transform: scaleY(var(--p, 0));
+  background: repeating-linear-gradient(to bottom, var(--rose-deep) 0 7px, transparent 7px 14px);
+}
+.spine span::after {
+  content: ""; position: absolute; bottom: -5px; inset-inline-start: -4px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--rose-deep);
+  box-shadow: 0 0 0 4px rgba(229, 143, 166, .25);
+}
+
+/* ───────── Hero ───────── */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding-block: 2.2rem 4.5rem;
+  position: relative;
+}
+.verse {
+  margin: 0 0 .4rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3.6vw, 1.7rem);
+  color: var(--ink);
+  letter-spacing: .01em;
+}
+.logo-wrap {
+  width: min(500px, 86vw);
+  aspect-ratio: 1 / .74;
+  animation: float 7s ease-in-out infinite;
+  transition: transform .25s ease-out;
+  will-change: transform;
+}
+.logo-wrap img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 46%;
+  -webkit-mask-image: radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%);
+}
+@keyframes float { 50% { translate: 0 -10px; } }
+
+.title { margin: -.6rem 0 0; width: min(520px, 88vw); line-height: 0; }
+.title svg { width: 100%; height: auto; overflow: visible; }
+.stitch-text {
+  font-family: var(--font-display); font-weight: 700; font-size: 190px;
+  fill: url(#ink); fill-opacity: 0;
+  stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round;
+  stroke-dasharray: 7 8;
+  animation: march 2.4s linear infinite, fillin 1.6s ease 1.1s forwards;
+}
+@keyframes march { to { stroke-dashoffset: -30; } }
+@keyframes fillin { to { fill-opacity: 1; stroke-opacity: .25; } }
+
+.lead {
+  margin: .4rem 0 1.8rem;
+  font-size: clamp(1.1rem, 3.4vw, 1.4rem);
+  font-weight: 500;
+  color: var(--ink-deep);
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.6rem; border-radius: 999px;
+  font-weight: 700; font-size: 1rem; text-decoration: none;
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn svg { width: 22px; height: 22px; }
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--ink) 0%, #7a6aa8 55%, var(--rose-deep) 130%);
+  box-shadow: 0 12px 28px -12px rgba(79, 74, 115, .8);
+}
+.btn-ghost { color: var(--ink); background: var(--glass); border: 1.5px dashed var(--ink); }
+.btn:hover { transform: translateY(-3px); }
+.btn-primary:hover { box-shadow: 0 18px 34px -12px rgba(79, 74, 115, .9); }
+.btn-ghost:hover { background: #fff; }
+
+.cue {
+  position: absolute; bottom: 1.4rem; inset-inline: 0; margin-inline: auto;
+  width: 26px; height: 42px; border: 2px solid var(--ink); border-radius: 14px; opacity: .55;
+}
+.cue span { position: absolute; top: 7px; left: 50%; width: 4px; height: 8px; margin-left: -2px; background: var(--ink); border-radius: 3px; animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+/* Hero entrance — the one orchestrated moment */
+.js .verse, .js .logo-wrap, .js .title, .js .lead, .js .actions, .js .cue { opacity: 0; }
+.ready .verse   { animation: rise .9s .1s both; }
+.ready .logo-wrap { animation: riseLogo 1s .3s both, float 7s 1.3s ease-in-out infinite; }
+.ready .title   { animation: rise .9s .6s both; }
+.ready .lead    { animation: rise .9s 1.7s both; }
+.ready .actions { animation: rise .9s 1.9s both; }
+.ready .cue     { animation: rise .9s 2.3s both; }
+@keyframes riseLogo { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.ready .cue { animation-name: riseCue; }
+@keyframes riseCue { from { opacity: 0; } to { opacity: .55; } }
+
+/* ───────── Story: the embroidery hoop ───────── */
+.story { display: grid; place-items: center; padding-block: 4rem 5rem; }
+.hoop {
+  position: relative;
+  width: min(560px, 92vw); aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 18px;
+  background:
+    linear-gradient(145deg, #fff7d6, var(--butter) 40%, #e3cf8a) padding-box;
+  box-shadow: var(--shadow), inset 0 0 0 2px rgba(255, 255, 255, .7), inset 0 -6px 14px rgba(160, 130, 40, .25);
+}
+.hoop-inner {
+  position: relative; width: 100%; height: 100%; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 14%;
+  background:
+    radial-gradient(circle at 30% 25%, #fff, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(160deg, #fffafc, var(--rose) 160%);
+  box-shadow: inset 0 6px 16px rgba(79, 74, 115, .18);
+}
+.hoop-inner::before {
+  content: ""; position: absolute; inset: 7%; border-radius: 50%;
+  border: 2px dashed var(--rose-deep);
+  animation: spin 80s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.story-a { margin: 0 0 .7rem; font-family: var(--font-display); font-size: clamp(1.25rem, 4.6vw, 1.95rem); line-height: 1.7; color: var(--ink-deep); }
+.story-b { margin: 0; font-size: clamp(1rem, 3.5vw, 1.3rem); line-height: 1.9; }
+.story-b strong { font-family: var(--font-display); font-size: 1.25em; color: var(--rose-deep); font-weight: 700; }
+.knob {
+  position: absolute; top: -26px; left: 50%; width: 46px; height: 40px; margin-left: -23px;
+  border-radius: 8px 8px 4px 4px;
+  background: linear-gradient(90deg, #cdb865, #f1e2a0 50%, #cdb865);
+  box-shadow: 0 6px 12px -6px rgba(0, 0, 0, .4);
+}
+.knob::after { content: ""; position: absolute; inset: 14px 8px auto; height: 6px; border-radius: 3px; background: rgba(120, 95, 20, .45); }
+
+/* ───────── Contact ───────── */
+.contact { padding-block: 1rem 5rem; text-align: center; }
+.contact h2 { margin: 0 0 1.8rem; font-family: var(--font-display); font-size: clamp(1.7rem, 5vw, 2.3rem); color: var(--ink-deep); }
+.cards { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: 1.1rem; max-width: 920px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.card {
+  position: relative; height: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: .15rem;
+  padding: 1.7rem 1.2rem; text-decoration: none; color: var(--ink);
+  background: var(--glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-radius: 26px; box-shadow: var(--shadow);
+  outline: 1.5px dashed rgba(79, 74, 115, .45); outline-offset: -9px;
+  transition: transform .25s, background .25s, outline-color .25s;
+}
+.card svg { width: 34px; height: 34px; margin-bottom: .45rem; color: var(--rose-deep); }
+.card-label { font-size: .95rem; color: var(--ink); opacity: .75; }
+.card strong { font-size: 1.2rem; color: var(--ink-deep); }
+a.card:hover { transform: translateY(-6px) rotate(-.6deg); background: #fff; outline-color: var(--rose-deep); }
+
+/* ───────── Footer ───────── */
+footer { position: relative; z-index: 1; padding: 2.2rem 1rem 2.6rem; text-align: center; }
+.credit {
+  display: inline-block; margin: 0; padding: .55rem 1.3rem;
+  font-size: .95rem; letter-spacing: .06em; direction: ltr;
+  background: var(--glass); border-radius: 999px; border: 1px dashed var(--peri);
+}
+.credit a { font-weight: 700; text-decoration: none; color: var(--ink-deep); border-bottom: 1.5px solid var(--rose-deep); transition: color .2s; }
+.credit a:hover { color: var(--rose-deep); }
+
+/* ───────── Small screens & motion preferences ───────── */
+@media (max-width: 640px) {
+  .spine { display: none; }
+  .hero { padding-block: 1.6rem 4.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .verse, .js .logo-wrap, .js .title, .js .lead, .js .actions { opacity: 1; }
+  .js .cue { opacity: .55; }
+  .stitch-text { fill-opacity: 1; stroke-opacity: .25; }
+}
